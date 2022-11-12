@@ -12,7 +12,7 @@ type jsonResponse struct {
 
 func (app *application) Login(w http.ResponseWriter, r *http.Request) {
 	type credentials struct {
-		Nickname string `json:"nickname"`
+		Email string `json:"Email"`
 		Password string `json:"password"`}
 
 		var creds credentials
@@ -37,7 +37,7 @@ func (app *application) Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// TODO : authenticate 
-		app.infoLog.Println("User", creds.Nickname, "pwd", creds.Password)
+		app.infoLog.Println("User", creds.Email, "pwd", creds.Password)
 
 		// send back a response
 		payload.Error = false
@@ -49,7 +49,7 @@ func (app *application) Login(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusOK)
 		w.Write(out)
 
 }
