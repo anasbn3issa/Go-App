@@ -31,19 +31,22 @@ func ConnectPostgres(dsn string) (*DB, error) {
 	db.SetConnMaxLifetime(maxDbLifeTime)
 
 
-	err = testDb(err, db)
+	err = testDb(db)
+	if err != nil {
+		return nil, err
+	}
 	dbConn.SQL = db
 
 	return dbConn, err
 }
 
-func testDb(err error, db *sql.DB) error {
-	err = db.Ping()
+func testDb(db *sql.DB) error {
+	err := db.Ping()
 	if err != nil {
 		fmt.Println("Error connecting to database: ", err)
-	} else {
-		fmt.Println("*** Connected to database ***")
-	}
+		return err
+	} 
+	fmt.Println("*** Connected to database ***")
 
-	return err
+	return nil
 }
