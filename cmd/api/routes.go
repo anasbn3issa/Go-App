@@ -40,7 +40,7 @@ func (app *application) routes() http.Handler {
 			}
 
 			app.writeJSON(w, http.StatusOK, payload)
-		})
+		}) //test ssh
 	})
 
 	mux.Get("/users/all", func(w http.ResponseWriter, r *http.Request){
